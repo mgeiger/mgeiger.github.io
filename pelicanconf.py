@@ -26,17 +26,19 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('You can modify those links in your config file', '#'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = (('LinkedIn', 'https://www.linkedin.com/in/matthewjgeiger'),
+        ('GitHub', 'https://github.com/mgeiger'),)
 
 DEFAULT_PAGINATION = 10
+SUMMARY_MAX_LENGTH = 50
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-STATIC_PATHS = ['extra/CNAME', 'extra/robots.txt']
-EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},
+STATIC_PATHS = ['extra/robots.txt', 'extra/favicon.ico']
+EXTRA_PATH_METADATA = {
         'extra/robots.txt': {'path': 'robots.txt'},
+        'extra/favicon.ico': {'path': 'favicon.ico'},
         }
 TYPOGRIFY = True
 PLUGIN_PATHS = ['../pelican-plugins/', ]
