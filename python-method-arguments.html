@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Authors - Geiger Labs Blog</title>
+    <title>Python Method Arguments - Geiger Labs Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,15 +9,22 @@
 
 
 
+<link rel="canonical" href="https://mgeiger.github.io/python-method-arguments.html">
 
         <meta name="author" content="Matthew Geiger" />
+        <meta name="keywords" content="python,programming" />
+        <meta name="description" content="Finding Keyword Arguments in Python Class Methods" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Geiger Labs Blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Geiger Labs Blog"/>
-        <meta property="og:url" content="https://mgeiger.github.io"/>
-        <meta property="og:description" content="Geiger Labs Blog"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Python Method Arguments"/>
+        <meta property="og:url" content="https://mgeiger.github.io/python-method-arguments.html"/>
+        <meta property="og:description" content="Finding Keyword Arguments in Python Class Methods"/>
+        <meta property="article:published_time" content="2020-05-18" />
+            <meta property="article:section" content="python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:author" content="Matthew Geiger" />
 
 
 
@@ -32,7 +39,8 @@
         <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Geiger Labs Blog ATOM Feed"/>
 
-
+        <link href="https://mgeiger.github.io/feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Geiger Labs Blog python ATOM Feed"/>
 </head>
 <body>
 
@@ -59,7 +67,7 @@ Geiger Labs Blog            </a>
                         <li >
                             <a href="https://mgeiger.github.io/category/misc.html">Misc</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="https://mgeiger.github.io/category/python.html">Python</a>
                         </li>
             </ul>
@@ -77,9 +85,76 @@ Geiger Labs Blog            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-  <h1>Authors on Geiger Labs Blog</h1>
-        <li><a href="https://mgeiger.github.io/author/matthew-geiger.html">Matthew Geiger</a> (2)</li>
-        <li><a href="https://mgeiger.github.io/author/my-name.html">My Name</a> (1)</li>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mgeiger.github.io/python-method-arguments.html"
+                       rel="bookmark"
+                       title="Permalink to Python Method Arguments">
+                        Python Method&nbsp;Arguments
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-05-18T21:41:00-04:00"> Mon 18 May 2020</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mgeiger.github.io/tag/python.html">python</a>
+        /
+	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>At work, we have a library that we are installing using a Git Hash.
+This is an older library that has not been updated to use proper versioning and&nbsp;packaging. </p>
+<p>The library has a change that needs to get pulled down but not all users are updating this library.
+The Goal of this is to check to see if a keyword argument has been added to a class method. 
+The class looks kind of like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyFunkyClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">internal_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+
+<p>Our goal here is to check that <code>arg2</code> is available as it was&nbsp;implemented.</p>
+<p>I started looking around on how to do this, and came across the <a href="https://docs.python.org/3/library/inspect.html">inspect</a> module. 
+If you look under the <code>code</code> Type, you can see the <code>co_varnames</code> and that it will give&nbsp;you:</p>
+<blockquote>
+<p>tuple of names of arguments and local variables
+This is exactly what I&#8217;m looking&nbsp;for.</p>
+</blockquote>
+<p>Let&#8217;s set up some code that sees if <code>arg2</code> is an argument in <code>MyFunkyClass.internal_method</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Import the Class </span>
+<span class="kn">from</span> <span class="nn">funky</span> <span class="kn">import</span> <span class="n">MyFunkyClass</span>
+
+<span class="c1"># Get a pointer to the class method</span>
+<span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">MyFunkyClass</span><span class="p">,</span> <span class="s1">&#39;internal_method&#39;</span><span class="p">)</span>
+
+<span class="c1"># Chceck if arg2 is an argument</span>
+<span class="k">assert</span> <span class="s1">&#39;arg2&#39;</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span>
+</code></pre></div>
+
+
+<p>That&#8217;s it. Pretty&nbsp;simple.</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
