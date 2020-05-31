@@ -1,4 +1,7 @@
+nltk
+beautifulsoup4
 pelican
 ghp-import
 markdown
 typogrify
+gensim>=3.5.0

@@ -1,0 +1,11 @@
+{% if article.related_posts %}
+<section class="well" id="related-posts">
+    <h4>{{ RELATED_POSTS_TEXT|default('Related Posts:') }}</h4>
+    <ul>
+    {% for related_post in article.related_posts %}
+        <li><a href="{{ SITEURL }}/{{ related_post.url }}">{{ related_post.title }}</a>,
+		Score: {{ '%0.3f' % article.score.get(related_post.source_path) }}</li>
+    {% endfor %}
+    </ul>
+</section>
+{% endif %}
