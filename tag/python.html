@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>python - Geiger Labs Blog</title>
+    <title>python - Geiger Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -14,16 +14,16 @@
     <meta name="keywords" content="python" />
 
     <!-- Open Graph tags -->
-        <meta property="og:site_name" content="Geiger Labs Blog" />
+        <meta property="og:site_name" content="Geiger Blog" />
         <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Geiger Labs Blog"/>
+        <meta property="og:title" content="Geiger Blog"/>
         <meta property="og:url" content="https://mgeiger.github.io"/>
-        <meta property="og:description" content="Geiger Labs Blog"/>
+        <meta property="og:description" content="Geiger Blog"/>
 
 
 
     <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://mgeiger.github.io/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+        <link rel="stylesheet" href="https://mgeiger.github.io/theme/css/bootstrap.yeti.min.css" type="text/css"/>
     <link href="https://mgeiger.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="https://mgeiger.github.io/theme/css/pygments/native.css" rel="stylesheet">
@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="https://mgeiger.github.io/theme/css/style.css" type="text/css"/>
 
         <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Geiger Labs Blog ATOM Feed"/>
+              title="Geiger Blog ATOM Feed"/>
 
 
 </head>
@@ -47,13 +47,22 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="https://mgeiger.github.io/" class="navbar-brand">
-Geiger Labs Blog            </a>
+Geiger Blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
                          <li><a href="https://mgeiger.github.io/pages/about.html">
                              About
                           </a></li>
+                         <li><a href="https://mgeiger.github.io/pages/contact.html">
+                             Contact
+                          </a></li>
+                        <li >
+                            <a href="https://mgeiger.github.io/category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="https://mgeiger.github.io/category/python.html">Python</a>
+                        </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
             </ul>
@@ -70,9 +79,23 @@ Geiger Labs Blog            </a>
     <div class="row">
         <div class="col-sm-9">
             <article>
-                <h2><a href="https://mgeiger.github.io/python-method-arguments.html">Python Method&nbsp;Arguments</a></h2>
+                <h2><a href="https://mgeiger.github.io/2020/determine-sun-up-down.html">Determine Sun Up or Down using&nbsp;Python</a></h2>
+                <div class="summary"><p>Based upon a location, we should be able to determine if the sun at that location is up or&nbsp;down</p>
+                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/2020/determine-sun-up-down.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://mgeiger.github.io/2020/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a></h2>
+                <div class="summary"><p>Using a continuous monitoring testing tool with your Python Pytest&nbsp;project</p>
+                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/2020/using-pytest-watch.html">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://mgeiger.github.io/2020/python-method-arguments.html">Python Method&nbsp;Arguments</a></h2>
                 <div class="summary"><p>Finding Keyword Arguments in Python Class&nbsp;Methods</p>
-                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/python-method-arguments.html">more ...</a>
+                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/2020/python-method-arguments.html">more ...</a>
                 </div>
             </article>
             <hr/>
@@ -81,9 +104,17 @@ Geiger Labs Blog            </a>
         <div class="col-sm-3" id="sidebar">
             <aside>
 <div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="https://mgeiger.github.io/images/profile.jpg"/>
+        </p>
     <p>
       <strong>About Matthew Geiger</strong><br/>
-        Software Automation Engineer who loves Python
+        
+Software Engineer who loves working with Python
+<br />
+<br />
+Currently working as a Senior Automation Engineer at Bose
+
     </p>
 </div><!-- Sidebar -->
 <section class="well well-sm">
@@ -99,15 +130,6 @@ Geiger Labs Blog            </a>
   </ul>
 </li>
 <!-- End Sidebar/Social -->
-
-<!-- Sidebar/Github -->
-<li class="list-group-item">
-  <h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
-  <div id="gh_repos">
-    <p class="list-group-item">Status updating...</p>
-  </div>
-</li>
-<!-- End Sidebar/Github -->
   </ul>
 </section>
 <!-- End Sidebar -->            </aside>
@@ -137,28 +159,6 @@ Geiger Labs Blog            </a>
 <script src="https://mgeiger.github.io/theme/js/respond.min.js"></script>
 
 
-
-<!-- GitHub JS Code -->
-<script type="text/javascript">
-$(document).ready(function () {
-  if (!window.jXHR) {
-    var jxhr = document.createElement('script');
-    jxhr.type = 'text/javascript';
-    jxhr.src = 'https://mgeiger.github.io/theme/js/jXHR.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(jxhr, s);
-  }
-
-  github.showRepos({
-    user: 'mgeiger',
-    count: 2,
-    skip_forks: true,
-    target: '#gh_repos'
-  });
-});
-</script>
-<script src="https://mgeiger.github.io/theme/js/github.js" type="text/javascript"></script>
-<!-- End GitHub JS Code -->
     <!-- Google Analytics -->
     <script type="text/javascript">
 

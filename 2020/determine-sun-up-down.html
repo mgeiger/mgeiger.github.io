@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Archives - Geiger Blog</title>
+    <title>Determine Sun Up or Down using Python - Geiger Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,15 +9,22 @@
 
 
 
+<link rel="canonical" href="https://mgeiger.github.io/2020/determine-sun-up-down.html">
 
         <meta name="author" content="Matthew Geiger" />
+        <meta name="keywords" content="python,programming" />
+        <meta name="description" content="Based upon a location, we should be able to determine if the sun at that location is up or down" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Geiger Blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Geiger Blog"/>
-        <meta property="og:url" content="https://mgeiger.github.io"/>
-        <meta property="og:description" content="Geiger Blog"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Determine Sun Up or Down using Python"/>
+        <meta property="og:url" content="https://mgeiger.github.io/2020/determine-sun-up-down.html"/>
+        <meta property="og:description" content="Based upon a location, we should be able to determine if the sun at that location is up or down"/>
+        <meta property="article:published_time" content="2020-05-30" />
+            <meta property="article:section" content="python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:author" content="Matthew Geiger" />
 
 
 
@@ -32,7 +39,8 @@
         <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Geiger Blog ATOM Feed"/>
 
-
+        <link href="https://mgeiger.github.io/feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Geiger Blog python ATOM Feed"/>
 </head>
 <body>
 
@@ -59,7 +67,7 @@ Geiger Blog            </a>
                         <li >
                             <a href="https://mgeiger.github.io/category/javascript.html">Javascript</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="https://mgeiger.github.io/category/python.html">Python</a>
                         </li>
             </ul>
@@ -78,26 +86,89 @@ Geiger Blog            </a>
     <div class="row">
         <div class="col-sm-9">
     <section id="content">
-      <h1>Archives for Geiger Blog</h1>
-        <div id="archives">
-                <p>
-                    <span class="categories-timestamp"><time datetime="2020-05-30T15:47:00-04:00">Sat 30 May 2020</time></span>
-                    <a href="https://mgeiger.github.io/2020/determine-sun-up-down.html">Determine Sun Up or Down using&nbsp;Python</a>
-                </p>
-                <p>
-                    <span class="categories-timestamp"><time datetime="2020-05-26T21:49:00-04:00">Tue 26 May 2020</time></span>
-                    <a href="https://mgeiger.github.io/2020/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a>
-                </p>
-                <p>
-                    <span class="categories-timestamp"><time datetime="2020-05-26T21:09:00-04:00">Tue 26 May 2020</time></span>
-                    <a href="https://mgeiger.github.io/2020/chartjs-annotations.html">Adding Annotations to&nbsp;Chartjs</a>
-                </p>
-                <p>
-                    <span class="categories-timestamp"><time datetime="2020-05-18T21:41:00-04:00">Mon 18 May 2020</time></span>
-                    <a href="https://mgeiger.github.io/2020/python-method-arguments.html">Python Method&nbsp;Arguments</a>
-                </p>
-        </div>
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mgeiger.github.io/2020/determine-sun-up-down.html"
+                       rel="bookmark"
+                       title="Permalink to Determine Sun Up or Down using Python">
+                        Determine Sun Up or Down using&nbsp;Python
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-05-30T15:47:00-04:00"> Sat 30 May 2020</time>
+    </span>
+        <span class="label label-default">Read time</span>
+        <span class="published">
+            <i class="fa fa-hourglass"></i> 1 min</span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mgeiger.github.io/tag/python.html">python</a>
+        /
+	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>At work, we have a library that we are installing using a Git Hash.
+This is an older library that has not been updated to use proper versioning and&nbsp;packaging. </p>
+<p>The library has a change that needs to get pulled down but not all users are updating this library.
+The Goal of this is to check to see if a keyword argument has been added to a class method. 
+The class looks kind of like&nbsp;this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyFunkyClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">internal_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
+        <span class="k">pass</span>
+</code></pre></div>
+
+
+<p>Our goal here is to check that <code>arg2</code> is available as it was&nbsp;implemented.</p>
+<p>I started looking around on how to do this, and came across the <a href="https://docs.python.org/3/library/inspect.html">inspect</a> module. 
+If you look under the <code>code</code> Type, you can see the <code>co_varnames</code> and that it will give&nbsp;you:</p>
+<blockquote>
+<p>tuple of names of arguments and local variables
+This is exactly what I&#8217;m looking&nbsp;for.</p>
+</blockquote>
+<p>Let&#8217;s set up some code that sees if <code>arg2</code> is an argument in <code>MyFunkyClass.internal_method</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Import the Class </span>
+<span class="kn">from</span> <span class="nn">funky</span> <span class="kn">import</span> <span class="n">MyFunkyClass</span>
+
+<span class="c1"># Get a pointer to the class method</span>
+<span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">MyFunkyClass</span><span class="p">,</span> <span class="s1">&#39;internal_method&#39;</span><span class="p">)</span>
+
+<span class="c1"># Chceck if arg2 is an argument</span>
+<span class="k">assert</span> <span class="s1">&#39;arg2&#39;</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span>
+</code></pre></div>
+
+
+<p>That&#8217;s it. Pretty&nbsp;simple.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mgeiger.github.io/2020/python-method-arguments.html">Python Method&nbsp;Arguments</a>,
+		Score: 1.000</li>
+        <li><a href="https://mgeiger.github.io/2020/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a>,
+		Score: 0.062</li>
+        <li><a href="https://mgeiger.github.io/2020/chartjs-annotations.html">Adding Annotations to&nbsp;Chartjs</a>,
+		Score: 0.062</li>
+    </ul>
+</section>
+        </article>
     </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>

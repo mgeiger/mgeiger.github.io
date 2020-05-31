@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Geiger Labs Blog</title><link href="https://mgeiger.github.io/" rel="alternate"></link><link href="https://mgeiger.github.io/feeds/all.atom.xml" rel="self"></link><id>https://mgeiger.github.io/</id><updated>2020-05-18T21:41:00-04:00</updated><entry><title>Python Method Arguments</title><link href="https://mgeiger.github.io/python-method-arguments.html" rel="alternate"></link><published>2020-05-18T21:41:00-04:00</published><updated>2020-05-18T00:00:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-18:/python-method-arguments.html</id><summary type="html">&lt;p&gt;Finding Keyword Arguments in Python Class&amp;nbsp;Methods&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work, we have a library that we are installing using a Git Hash.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Geiger Blog</title><link href="https://mgeiger.github.io/" rel="alternate"></link><link href="https://mgeiger.github.io/feeds/all.atom.xml" rel="self"></link><id>https://mgeiger.github.io/</id><updated>2020-05-30T15:47:00-04:00</updated><entry><title>Determine Sun Up or Down using Python</title><link href="https://mgeiger.github.io/2020/determine-sun-up-down.html" rel="alternate"></link><published>2020-05-30T15:47:00-04:00</published><updated>2020-05-30T15:47:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-30:/2020/determine-sun-up-down.html</id><summary type="html">&lt;p&gt;Based upon a location, we should be able to determine if the sun at that location is up or&amp;nbsp;down&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work, we have a library that we are installing using a Git Hash.
+This is an older library that has not been updated to use proper versioning and&amp;nbsp;packaging. &lt;/p&gt;
+&lt;p&gt;The library has a change that needs to get pulled down but not all users are updating this library.
+The Goal of this is to check to see if a keyword argument has been added to a class method. 
+The class looks kind of like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;MyFunkyClass&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;internal_method&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;arg2&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Our goal here is to check that &lt;code&gt;arg2&lt;/code&gt; is available as it was&amp;nbsp;implemented.&lt;/p&gt;
+&lt;p&gt;I started looking around on how to do this, and came across the &lt;a href="https://docs.python.org/3/library/inspect.html"&gt;inspect&lt;/a&gt; module. 
+If you look under the &lt;code&gt;code&lt;/code&gt; Type, you can see the &lt;code&gt;co_varnames&lt;/code&gt; and that it will give&amp;nbsp;you:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;tuple of names of arguments and local variables
+This is exactly what I&amp;#8217;m looking&amp;nbsp;for.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Let&amp;#8217;s set up some code that sees if &lt;code&gt;arg2&lt;/code&gt; is an argument in &lt;code&gt;MyFunkyClass.internal_method&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# Import the Class &lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;funky&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MyFunkyClass&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Get a pointer to the class method&lt;/span&gt;
+&lt;span class="n"&gt;method&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;getattr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;MyFunkyClass&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;internal_method&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Chceck if arg2 is an argument&lt;/span&gt;
+&lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;arg2&amp;#39;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;method&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__code__&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;co_varnames&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That&amp;#8217;s it. Pretty&amp;nbsp;simple.&lt;/p&gt;</content><category term="python"></category><category term="python"></category><category term="programming"></category></entry><entry><title>Using pytest-watch for Continous Testing</title><link href="https://mgeiger.github.io/2020/using-pytest-watch.html" rel="alternate"></link><published>2020-05-26T21:49:00-04:00</published><updated>2020-05-26T21:49:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-26:/2020/using-pytest-watch.html</id><summary type="html">&lt;p&gt;Using a continuous monitoring testing tool with your Python Pytest&amp;nbsp;project&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started making an interesting tool called gotime. 
+I&amp;#8217;m a big fan of Test Driven Development and working with&amp;nbsp;pytest.&lt;/p&gt;
+&lt;p&gt;This tool &lt;a href="https://pypi.org/project/pytest-watch/"&gt;pytest-watch&lt;/a&gt; will continuously monitor your project and run any test that has underlying changes to your project&amp;nbsp;code.&lt;/p&gt;</content><category term="Python"></category><category term="programming"></category><category term="python"></category><category term="pytest"></category><category term="pytest-watch"></category></entry><entry><title>Adding Annotations to Chartjs</title><link href="https://mgeiger.github.io/2020/chartjs-annotations.html" rel="alternate"></link><published>2020-05-26T21:09:00-04:00</published><updated>2020-05-26T21:09:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-26:/2020/chartjs-annotations.html</id><summary type="html">&lt;p&gt;Adding Line and Box annotations to a Chartjs&amp;nbsp;Display&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was slowly generating some data on site that I wanted to display using &lt;a href="https://www.chartjs.org/"&gt;Chart.js&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;The end goal was to have a quick visualizaiton showing good/mediocre/bad&amp;nbsp;numbers.&lt;/p&gt;</content><category term="Javascript"></category><category term="programming"></category><category term="javascript"></category><category term="chartjs"></category></entry><entry><title>Python Method Arguments</title><link href="https://mgeiger.github.io/2020/python-method-arguments.html" rel="alternate"></link><published>2020-05-18T21:41:00-04:00</published><updated>2020-05-18T00:00:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-18:/2020/python-method-arguments.html</id><summary type="html">&lt;p&gt;Finding Keyword Arguments in Python Class&amp;nbsp;Methods&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work, we have a library that we are installing using a Git Hash.
 This is an older library that has not been updated to use proper versioning and&amp;nbsp;packaging. &lt;/p&gt;
 &lt;p&gt;The library has a change that needs to get pulled down but not all users are updating this library.
 The Goal of this is to check to see if a keyword argument has been added to a class method. 

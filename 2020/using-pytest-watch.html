@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>About - Geiger Blog</title>
+    <title>Using pytest-watch for Continous Testing - Geiger Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,16 +9,24 @@
 
 
 
-<link rel="canonical" href="https://mgeiger.github.io/pages/about.html">
+<link rel="canonical" href="https://mgeiger.github.io/2020/using-pytest-watch.html">
 
-        <meta name="author" content="My Name" />
-        <meta name="description" content="Bonjour, wilkommen a kono blog. Hi, I am and I wrote this epic collection of Interweb wisdom. In days of yore, much of this would have been deemed sorcery and I would probably have been burned at the stake." />
+        <meta name="author" content="Matthew Geiger" />
+        <meta name="keywords" content="programming,python,pytest,pytest-watch" />
+        <meta name="description" content="Using a continuous monitoring testing tool with your Python Pytest project" />
 
-    <meta property="og:site_name" content="Geiger Blog" />
-    <meta property="og:type" content="article"/>
-    <meta property="og:title" content="About"/>
-    <meta property="og:url" content="https://mgeiger.github.io/pages/about.html"/>
-    <meta property="og:description" content="Bonjour, wilkommen a kono blog. Hi, I am and I wrote this epic collection of Interweb wisdom. In days of yore, much of this would have been deemed sorcery and I would probably have been burned at the stake." />
+        <meta property="og:site_name" content="Geiger Blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Using pytest-watch for Continous Testing"/>
+        <meta property="og:url" content="https://mgeiger.github.io/2020/using-pytest-watch.html"/>
+        <meta property="og:description" content="Using a continuous monitoring testing tool with your Python Pytest project"/>
+        <meta property="article:published_time" content="2020-05-26" />
+            <meta property="article:section" content="Python" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="pytest" />
+            <meta property="article:tag" content="pytest-watch" />
+            <meta property="article:author" content="Matthew Geiger" />
 
 
 
@@ -33,7 +41,8 @@
         <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Geiger Blog ATOM Feed"/>
 
-
+        <link href="https://mgeiger.github.io/feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Geiger Blog Python ATOM Feed"/>
 </head>
 <body>
 
@@ -51,7 +60,7 @@ Geiger Blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                         <li class="active"><a href="https://mgeiger.github.io/pages/about.html">
+                         <li><a href="https://mgeiger.github.io/pages/about.html">
                              About
                           </a></li>
                          <li><a href="https://mgeiger.github.io/pages/contact.html">
@@ -60,7 +69,7 @@ Geiger Blog            </a>
                         <li >
                             <a href="https://mgeiger.github.io/category/javascript.html">Javascript</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="https://mgeiger.github.io/category/python.html">Python</a>
                         </li>
             </ul>
@@ -78,17 +87,63 @@ Geiger Blog            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-    <section id="content" class="body">
-        <h1 class="entry-title">About</h1>
-        
-        <div class="entry-content">
-            <p><img alt="So schmexy" src="https://mgeiger.github.io/images/profile.jpg"></p>
-<p>Bonjour, wilkommen a kono&nbsp;blog.</p>
-<p>Hi, I am <username> and I wrote this epic collection of Interweb
-wisdom. In days of yore, much of this would have been deemed sorcery
-and I would probably have been burned at the&nbsp;stake.</p>
-        </div>
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mgeiger.github.io/2020/using-pytest-watch.html"
+                       rel="bookmark"
+                       title="Permalink to Using pytest-watch for Continous Testing">
+                        Using pytest-watch for Continous&nbsp;Testing
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-05-26T21:49:00-04:00"> Tue 26 May 2020</time>
+    </span>
+        <span class="label label-default">Read time</span>
+        <span class="published">
+            <i class="fa fa-hourglass"></i> 1 min</span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
+        /
+	<a href="https://mgeiger.github.io/tag/python.html">python</a>
+        /
+	<a href="https://mgeiger.github.io/tag/pytest.html">pytest</a>
+        /
+	<a href="https://mgeiger.github.io/tag/pytest-watch.html">pytest-watch</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>I started making an interesting tool called gotime. 
+I&#8217;m a big fan of Test Driven Development and working with&nbsp;pytest.</p>
+<p>This tool <a href="https://pypi.org/project/pytest-watch/">pytest-watch</a> will continuously monitor your project and run any test that has underlying changes to your project&nbsp;code.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mgeiger.github.io/2020/determine-sun-up-down.html">Determine Sun Up or Down using&nbsp;Python</a>,
+		Score: 0.062</li>
+        <li><a href="https://mgeiger.github.io/2020/python-method-arguments.html">Python Method&nbsp;Arguments</a>,
+		Score: 0.062</li>
+        <li><a href="https://mgeiger.github.io/2020/chartjs-annotations.html">Adding Annotations to&nbsp;Chartjs</a>,
+		Score: 0.000</li>
+    </ul>
+</section>
+        </article>
     </section>
+
         </div>
         <div class="col-sm-3" id="sidebar">
             <aside>
