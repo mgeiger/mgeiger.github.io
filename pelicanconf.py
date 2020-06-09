@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 # General Settings
 AUTHOR = 'Matthew Geiger'
-SITENAME = 'Geiger Blog'
+SITENAME = "Matthew Geiger's Blog"
 #SITEURL = 'https://mgeiger.github.io'
 SITEURL = ''
 TIMEZONE = 'America/New_York'
@@ -13,16 +13,26 @@ DEFAULT_LANG = 'en'
 # Paths
 PATH = 'content'
 ARTICLE_PATHS = ['articles']
-ARTICLE_SAVE_AS = '{date:%Y}/{slug}.html'
-ARTICLE_URL = '{date:%Y}/{slug}.html'
+ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%m}/{date:%d}/{slug}.html'
+ARTICLE_URL = 'articles/{date:%Y}/{date:%m}/{date:%d}/{slug}.html'
+
+DEFAULT_METADATA = {
+}
+# Drafts
+DRAFT_URL = 'drafts/{slug}.html'
+
 
 # Feeds
 # Feed generation is usually not desired when developing
-FEED_ALL_ATOM = None
-CATEGORY_FEED_ATOM = None
-TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
+FEED_ALL_ATOM = "feeds/all.atom.xml"
+TAG_FEED_ATOM = 'feeds/{slug}.tag.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
+TRANSLATION_FEED_ATOM = None
+# MENUITEMS = [
+#     ['RSS', "feeds/all.atom.xml"]
+# ]
 
 # Social
 # Blogroll
