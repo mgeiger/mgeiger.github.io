@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Pytest Exit Usage - Matthew Geiger's Blog</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html">
+
+        <meta name="author" content="Matthew Geiger" />
+        <meta name="keywords" content="python,pytest,programming" />
+        <meta name="description" content="Using the pytest.exit method in your code and what to expect for its results." />
+
+        <meta property="og:site_name" content="Matthew Geiger's Blog" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Pytest Exit Usage"/>
+        <meta property="og:url" content="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html"/>
+        <meta property="og:description" content="Using the pytest.exit method in your code and what to expect for its results."/>
+        <meta property="article:published_time" content="2020-06-05" />
+            <meta property="article:section" content="python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="pytest" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:author" content="Matthew Geiger" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://mgeiger.github.io/theme/css/bootstrap.paper.min.css" type="text/css"/>
+    <link href="https://mgeiger.github.io/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://mgeiger.github.io/theme/css/pygments/native.css" rel="stylesheet">
+        <link href="https://mgeiger.github.io/theme/css/typogrify.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://mgeiger.github.io/theme/css/style.css" type="text/css"/>
+
+        <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Matthew Geiger's Blog ATOM Feed"/>
+
+        <link href="https://mgeiger.github.io/feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Matthew Geiger's Blog python ATOM Feed"/>
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="https://mgeiger.github.io/" class="navbar-brand">
+Matthew Geiger's Blog            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                         <li><a href="https://mgeiger.github.io/pages/about.html">
+                             About
+                          </a></li>
+                         <li><a href="https://mgeiger.github.io/pages/contact.html">
+                             Contact
+                          </a></li>
+                        <li >
+                            <a href="https://mgeiger.github.io/category/javascript.html">Javascript</a>
+                        </li>
+                        <li >
+                            <a href="https://mgeiger.github.io/category/linux.html">Linux</a>
+                        </li>
+                        <li class="active">
+                            <a href="https://mgeiger.github.io/category/python.html">Python</a>
+                        </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html"
+                       rel="bookmark"
+                       title="Permalink to Pytest Exit Usage">
+                        Pytest Exit&nbsp;Usage
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2020-06-05T08:20:00-04:00"> Fri 05 June 2020</time>
+    </span>
+        <span class="label label-default">Read time</span>
+        <span class="published">
+            <i class="fa fa-hourglass"></i> 3 min</span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="https://mgeiger.github.io/tag/python.html">python</a>
+        /
+	<a href="https://mgeiger.github.io/tag/pytest.html">pytest</a>
+        /
+	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Most of my information comes from experiences at work. 
+I like to document some little tips and tricks I come across while helping my teammates.
+Usually I have my methods for getting things accomplished, but I always have a team member who wants something a little unusual when they are writing up their automation&nbsp;tests.</p>
+<p>This request was no&nbsp;different.</p>
+<p>A coworker has a few tests that they run on a regular basis. 
+The initial test they run is an update onto a product. If this test fails, we are in for some major problems and want to stop everything to evaluate the&nbsp;issue.</p>
+<p>The caveat is that we only want to stop testing on this single test, not every other test that runs.
+The single test that can cause everything to shut down will exit the system prematurely. 
+The other tests that will be run can pass, fail, xfail, error, or skip as&nbsp;necessary.</p>
+<p>With these little constraints, we had to immediately rule out the <code>-x</code> or <code>--exitfirst</code> command line option when running <code>pytest</code>.
+If we run this, we will handle the initial condition that we stop the test when the first one fails, but if we have a failure later on, then we don&#8217;t finish out the test suite to show if other tests pass and&nbsp;fail.</p>
+<p>We started with looking at standard Pytest features that could be used. 
+This lead us to the <code>pytest.exit()</code> function. 
+This function will immediately cause pytest to complete what it is doing, then backout as we are done.
+This sounds like something good to work&nbsp;with.</p>
+<p>Let&#8217;s try to make some sample tests that will help us&nbsp;out:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># test_exit.py</span>
+<span class="kn">import</span> <span class="nn">pytest</span>
+
+
+<span class="k">def</span> <span class="nf">test_1</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="kc">True</span>
+
+
+<span class="k">def</span> <span class="nf">test_2</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">test_3</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">test_4</span><span class="p">():</span>
+    <span class="k">assert</span> <span class="kc">True</span>
+</code></pre></div>
+
+
+<p>Now if we run this file against <code>pytest</code> with the following arguments <code>python -m pytest --verbose --capture=no test_exit.py</code>, we see the following&nbsp;output:</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">venv</span><span class="p">)</span><span class="w"> </span><span class="n">mgeiger</span><span class="nv">@ThinkPad</span><span class="o">-</span><span class="nl">X395</span><span class="p">:</span><span class="o">~/</span><span class="n">Projects</span><span class="o">/</span><span class="n">trials</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pytest_exit</span><span class="err">$</span><span class="w"> </span><span class="n">python</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="n">pytest</span><span class="w"> </span><span class="c1">--verbose --capture=no test_exit.py </span>
+<span class="o">=======================================</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">session</span><span class="w"> </span><span class="n">starts</span><span class="w"> </span><span class="o">========================================</span><span class="w"></span>
+<span class="n">platform</span><span class="w"> </span><span class="n">linux</span><span class="w"> </span><span class="c1">-- Python 3.8.2, pytest-5.4.3, py-1.8.1, pluggy-0.13.1 -- /home/mgeiger/Projects/trials/python/pytest_exit/venv/bin/python</span>
+<span class="nl">cachedir</span><span class="p">:</span><span class="w"> </span><span class="p">.</span><span class="n">pytest_cache</span><span class="w"></span>
+<span class="nl">rootdir</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">mgeiger</span><span class="o">/</span><span class="n">Projects</span><span class="o">/</span><span class="n">trials</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">pytest_exit</span><span class="w"></span>
+<span class="n">collected</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="n">items</span><span class="w">                                                                                  </span>
+
+<span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="err">:</span><span class="n">test_1</span><span class="w"> </span><span class="n">PASSED</span><span class="w"></span>
+<span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="err">:</span><span class="n">test_2</span><span class="w"> </span><span class="n">FAILED</span><span class="w"></span>
+<span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="err">:</span><span class="n">test_3</span><span class="w"> </span><span class="n">FAILED</span><span class="w"></span>
+<span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="err">:</span><span class="n">test_4</span><span class="w"> </span><span class="n">PASSED</span><span class="w"></span>
+
+<span class="o">=============================================</span><span class="w"> </span><span class="n">FAILURES</span><span class="w"> </span><span class="o">=============================================</span><span class="w"></span>
+<span class="n">______________________________________________</span><span class="w"> </span><span class="n">test_2</span><span class="w"> </span><span class="n">______________________________________________</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">test_2</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w">       </span><span class="n">assert</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+<span class="n">E</span><span class="w">       </span><span class="n">assert</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+
+<span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="mi">9</span><span class="err">:</span><span class="w"> </span><span class="n">AssertionError</span><span class="w"></span>
+<span class="n">______________________________________________</span><span class="w"> </span><span class="n">test_3</span><span class="w"> </span><span class="n">______________________________________________</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">def</span><span class="w"> </span><span class="n">test_3</span><span class="p">()</span><span class="err">:</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w">       </span><span class="n">assert</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+<span class="n">E</span><span class="w">       </span><span class="n">assert</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+
+<span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="mi">13</span><span class="err">:</span><span class="w"> </span><span class="n">AssertionError</span><span class="w"></span>
+<span class="o">=====================================</span><span class="w"> </span><span class="n">short</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">summary</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="o">======================================</span><span class="w"></span>
+<span class="n">FAILED</span><span class="w"> </span><span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="err">:</span><span class="n">test_2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">assert</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+<span class="n">FAILED</span><span class="w"> </span><span class="n">test_exit</span><span class="p">.</span><span class="nl">py</span><span class="p">:</span><span class="err">:</span><span class="n">test_3</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">assert</span><span class="w"> </span><span class="k">False</span><span class="w"></span>
+<span class="o">===================================</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">failed</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="n">passed</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="mf">0.12</span><span class="n">s</span><span class="w"> </span><span class="o">====================================</span><span class="w"></span>
+</code></pre></div>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Related Posts:</h4>
+    <ul>
+        <li><a href="https://mgeiger.github.io/articles/2020/05/26/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a>,
+		Score: 0.610</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/05/18/python-method-arguments.html">Python Method&nbsp;Arguments</a>,
+		Score: 0.325</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/06/05/interesting-linux-command-line-tricks.html">Interesting Linux Command Line&nbsp;Tricks</a>,
+		Score: 0.218</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/05/26/chartjs-annotations.html">Adding Annotations to&nbsp;Chartjs</a>,
+		Score: 0.026</li>
+    </ul>
+</section>
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="https://mgeiger.github.io/images/profile.jpg"/>
+        </p>
+    <p>
+      <strong>About Matthew Geiger</strong><br/>
+        
+Software Engineer who loves working with Python
+<br />
+<br />
+Currently working as a Senior Automation Engineer at Bose
+
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="https://www.linkedin.com/in/matthewjgeiger"><i class="fa fa-linkedin-square fa-lg"></i> LinkedIn</a></li>
+    <li class="list-group-item"><a href="https://github.com/mgeiger"><i class="fa fa-github-square fa-lg"></i> GitHub</a></li>
+    <li class="list-group-item"><a href="https://twitter.com/mgeiger1980"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2020 Matthew Geiger
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="https://mgeiger.github.io/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="https://mgeiger.github.io/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="https://mgeiger.github.io/theme/js/respond.min.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-39509679-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+
+</body>
+</html>

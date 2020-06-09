@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>Determine Sun Up or Down using Python - Geiger Blog</title>
+    <title>Interesting Linux Command Line Tricks - Matthew Geiger's Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,21 +9,22 @@
 
 
 
-<link rel="canonical" href="https://mgeiger.github.io/2020/determine-sun-up-down.html">
+<link rel="canonical" href="https://mgeiger.github.io/articles/2020/06/05/interesting-linux-command-line-tricks.html">
 
         <meta name="author" content="Matthew Geiger" />
-        <meta name="keywords" content="python,programming" />
-        <meta name="description" content="Based upon a location, we should be able to determine if the sun at that location is up or down" />
+        <meta name="keywords" content="programming,linux,bash" />
+        <meta name="description" content="A collection of tools, tips, and tricks that I use in my daily live working the command line" />
 
-        <meta property="og:site_name" content="Geiger Blog" />
+        <meta property="og:site_name" content="Matthew Geiger's Blog" />
         <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Determine Sun Up or Down using Python"/>
-        <meta property="og:url" content="https://mgeiger.github.io/2020/determine-sun-up-down.html"/>
-        <meta property="og:description" content="Based upon a location, we should be able to determine if the sun at that location is up or down"/>
-        <meta property="article:published_time" content="2020-05-30" />
-            <meta property="article:section" content="python" />
-            <meta property="article:tag" content="python" />
+        <meta property="og:title" content="Interesting Linux Command Line Tricks"/>
+        <meta property="og:url" content="https://mgeiger.github.io/articles/2020/06/05/interesting-linux-command-line-tricks.html"/>
+        <meta property="og:description" content="A collection of tools, tips, and tricks that I use in my daily live working the command line"/>
+        <meta property="article:published_time" content="2020-06-05" />
+            <meta property="article:section" content="Linux" />
             <meta property="article:tag" content="programming" />
+            <meta property="article:tag" content="linux" />
+            <meta property="article:tag" content="bash" />
             <meta property="article:author" content="Matthew Geiger" />
 
 
@@ -37,10 +38,10 @@
     <link rel="stylesheet" href="https://mgeiger.github.io/theme/css/style.css" type="text/css"/>
 
         <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Geiger Blog ATOM Feed"/>
+              title="Matthew Geiger's Blog ATOM Feed"/>
 
-        <link href="https://mgeiger.github.io/feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Geiger Blog python ATOM Feed"/>
+        <link href="https://mgeiger.github.io/feeds/linux.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Matthew Geiger's Blog Linux ATOM Feed"/>
 </head>
 <body>
 
@@ -54,7 +55,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a href="https://mgeiger.github.io/" class="navbar-brand">
-Geiger Blog            </a>
+Matthew Geiger's Blog            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
@@ -68,6 +69,9 @@ Geiger Blog            </a>
                             <a href="https://mgeiger.github.io/category/javascript.html">Javascript</a>
                         </li>
                         <li class="active">
+                            <a href="https://mgeiger.github.io/category/linux.html">Linux</a>
+                        </li>
+                        <li >
                             <a href="https://mgeiger.github.io/category/python.html">Python</a>
                         </li>
             </ul>
@@ -89,10 +93,10 @@ Geiger Blog            </a>
         <article>
             <header class="page-header">
                 <h1>
-                    <a href="https://mgeiger.github.io/2020/determine-sun-up-down.html"
+                    <a href="https://mgeiger.github.io/articles/2020/06/05/interesting-linux-command-line-tricks.html"
                        rel="bookmark"
-                       title="Permalink to Determine Sun Up or Down using Python">
-                        Determine Sun Up or Down using&nbsp;Python
+                       title="Permalink to Interesting Linux Command Line Tricks">
+                        Interesting Linux Command Line&nbsp;Tricks
                     </a>
                 </h1>
             </header>
@@ -102,68 +106,92 @@ Geiger Blog            </a>
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2020-05-30T15:47:00-04:00"> Sat 30 May 2020</time>
+        <i class="fa fa-calendar"></i><time datetime="2020-06-05T14:55:00-04:00"> Fri 05 June 2020</time>
     </span>
         <span class="label label-default">Read time</span>
         <span class="published">
-            <i class="fa fa-hourglass"></i> 1 min</span>
+            <i class="fa fa-hourglass"></i> 2 min</span>
 
 
 
 
 
 <span class="label label-default">Tags</span>
-	<a href="https://mgeiger.github.io/tag/python.html">python</a>
-        /
 	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
+        /
+	<a href="https://mgeiger.github.io/tag/linux.html">linux</a>
+        /
+	<a href="https://mgeiger.github.io/tag/bash.html">bash</a>
     
 </footer><!-- /.post-info -->                    </div>
                 </div>
-                <p>At work, we have a library that we are installing using a Git Hash.
-This is an older library that has not been updated to use proper versioning and&nbsp;packaging. </p>
-<p>The library has a change that needs to get pulled down but not all users are updating this library.
-The Goal of this is to check to see if a keyword argument has been added to a class method. 
-The class looks kind of like&nbsp;this:</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MyFunkyClass</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">pass</span>
-
-    <span class="k">def</span> <span class="nf">internal_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
-        <span class="k">pass</span>
+                <h2>Shortcuts</h2>
+<p>Go to the beginning of a line:
+<code>ctrl-a</code>
+Search for your prior commands:
+<code>ctrl-r</code></p>
+<h2>Aliases</h2>
+<p>Quick <code>history</code> information:</p>
+<p><code>alias h='history'</code>
+<code>alias hg='history | grep --color=auto'</code></p>
+<p>Keep an eye on your local&nbsp;network:</p>
+<p><code>alias LAN='nmap -sn 192.168.1.* | grep report'</code></p>
+<p>Monitor your system&nbsp;logs:</p>
+<p><code>alias LOG='tail -f /var/log/*log /var/log/*/*log'</code></p>
+<h2>History</h2>
+<p>Add to your <code>~/.bashrc</code> <code>HISTFILESIZE=</code> some number to increase&nbsp;that</p>
+<h2>Prior&nbsp;Commands</h2>
+<p>If you forget to run a command with <code>sudo</code>, just type <code>sudo !!</code> and you will rerun that prior command with <code>sudo</code>.</p>
+<p>You can also do this with a quick&nbsp;alias:</p>
+<p><code>alias please='sudo $(history -p \!\!)'</code></p>
+<h2>Web&nbsp;Server</h2>
+<p>If you have python3 installed on your system, you can quickly make a simple webserver that you can access via&nbsp;http.</p>
+<p><code>python3 -m http.server</code></p>
+<p>It gets servered to http://localhost:8000, so keep that in&nbsp;mind.</p>
+<h2><span class="caps">SSH</span>&nbsp;Configuration</h2>
+<p>Edit the <code>~/.ssh/config</code> to save information about some of the hosts that you typically connect&nbsp;to.</p>
+<div class="highlight"><pre><span></span><code><span class="err">Host tasker</span>
+<span class="err">   HostName someserver.example.com</span>
+<span class="err">   Port 7000</span>
+<span class="err">   UserName admin</span>
 </code></pre></div>
 
 
-<p>Our goal here is to check that <code>arg2</code> is available as it was&nbsp;implemented.</p>
-<p>I started looking around on how to do this, and came across the <a href="https://docs.python.org/3/library/inspect.html">inspect</a> module. 
-If you look under the <code>code</code> Type, you can see the <code>co_varnames</code> and that it will give&nbsp;you:</p>
-<blockquote>
-<p>tuple of names of arguments and local variables
-This is exactly what I&#8217;m looking&nbsp;for.</p>
-</blockquote>
-<p>Let&#8217;s set up some code that sees if <code>arg2</code> is an argument in <code>MyFunkyClass.internal_method</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Import the Class </span>
-<span class="kn">from</span> <span class="nn">funky</span> <span class="kn">import</span> <span class="n">MyFunkyClass</span>
-
-<span class="c1"># Get a pointer to the class method</span>
-<span class="n">method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">MyFunkyClass</span><span class="p">,</span> <span class="s1">&#39;internal_method&#39;</span><span class="p">)</span>
-
-<span class="c1"># Chceck if arg2 is an argument</span>
-<span class="k">assert</span> <span class="s1">&#39;arg2&#39;</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="vm">__code__</span><span class="o">.</span><span class="n">co_varnames</span>
+<p>Then you can just ssh into that machine with <code>ssh tasker</code>, instead of <code>ssh admin@someserver.example.com -p 7000</code>. </p>
+<p>You can repeat with all your hosts that you can connect&nbsp;to.</p>
+<h2>Creating&nbsp;Files</h2>
+<p>To create a few files with the same/similar names, you can use the&nbsp;following:</p>
+<div class="highlight"><pre><span></span><code><span class="err">touch output{0,1,2,}.txt</span>
 </code></pre></div>
 
 
-<p>That&#8217;s it. Pretty&nbsp;simple.</p>
+<p>This will create the following files
+* output0.txt
+* output1.txt
+* output2.txt
+*&nbsp;output.txt</p>
+<p>The last one is because I left the trailing <code>,</code> in the curly&nbsp;braces.</p>
+<h3>Creating a backup&nbsp;file</h3>
+<p>This one is very similar to above.
+If you have a file that you just want to put a <code>.bak</code> extention&nbsp;on:</p>
+<div class="highlight"><pre><span></span><code><span class="err">cp file.txt{,.bak}</span>
+</code></pre></div>
+
+
+<p>This will keep the original <code>file.txt</code> and create a quick backup as <code>file.txt.bak</code>.</p>
             </div>
             <!-- /.entry-content -->
 <section class="well" id="related-posts">
     <h4>Related Posts:</h4>
     <ul>
-        <li><a href="https://mgeiger.github.io/2020/python-method-arguments.html">Python Method&nbsp;Arguments</a>,
-		Score: 1.000</li>
-        <li><a href="https://mgeiger.github.io/2020/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a>,
-		Score: 0.062</li>
-        <li><a href="https://mgeiger.github.io/2020/chartjs-annotations.html">Adding Annotations to&nbsp;Chartjs</a>,
-		Score: 0.062</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html">Pytest Exit&nbsp;Usage</a>,
+		Score: 0.218</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/05/26/chartjs-annotations.html">Adding Annotations to&nbsp;Chartjs</a>,
+		Score: 0.175</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/05/18/python-method-arguments.html">Python Method&nbsp;Arguments</a>,
+		Score: 0.092</li>
+        <li><a href="https://mgeiger.github.io/articles/2020/05/26/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a>,
+		Score: 0.047</li>
     </ul>
 </section>
         </article>

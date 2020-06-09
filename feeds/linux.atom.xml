@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Matthew Geiger's Blog - Linux</title><link href="https://mgeiger.github.io/" rel="alternate"></link><link href="https://mgeiger.github.io/feeds/linux.atom.xml" rel="self"></link><id>https://mgeiger.github.io/</id><updated>2020-06-05T14:55:00-04:00</updated><entry><title>Interesting Linux Command Line Tricks</title><link href="https://mgeiger.github.io/articles/2020/06/05/interesting-linux-command-line-tricks.html" rel="alternate"></link><published>2020-06-05T14:55:00-04:00</published><updated>2020-06-05T14:55:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-06-05:/articles/2020/06/05/interesting-linux-command-line-tricks.html</id><summary type="html">&lt;p&gt;A collection of tools, tips, and tricks that I use in my daily live working the command&amp;nbsp;line&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Shortcuts&lt;/h2&gt;
+&lt;p&gt;Go to the beginning of a line:
+&lt;code&gt;ctrl-a&lt;/code&gt;
+Search for your prior commands:
+&lt;code&gt;ctrl-r&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Aliases&lt;/h2&gt;
+&lt;p&gt;Quick &lt;code&gt;history&lt;/code&gt; information:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias h='history'&lt;/code&gt;
+&lt;code&gt;alias hg='history | grep --color=auto'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Keep an eye on your local&amp;nbsp;network:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias LAN='nmap -sn 192.168.1.* | grep report'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Monitor your system&amp;nbsp;logs:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias LOG='tail -f /var/log/*log /var/log/*/*log'&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;Add to your &lt;code&gt;~/.bashrc&lt;/code&gt; &lt;code&gt;HISTFILESIZE=&lt;/code&gt; some number to increase&amp;nbsp;that&lt;/p&gt;
+&lt;h2&gt;Prior&amp;nbsp;Commands&lt;/h2&gt;
+&lt;p&gt;If you forget to run a command with &lt;code&gt;sudo&lt;/code&gt;, just type &lt;code&gt;sudo !!&lt;/code&gt; and you will rerun that prior command with &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can also do this with a quick&amp;nbsp;alias:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias please='sudo $(history -p \!\!)'&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Web&amp;nbsp;Server&lt;/h2&gt;
+&lt;p&gt;If you have python3 installed on your system, you can quickly make a simple webserver that you can access via&amp;nbsp;http.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python3 -m http.server&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;It gets servered to http://localhost:8000, so keep that in&amp;nbsp;mind.&lt;/p&gt;
+&lt;h2&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt;&amp;nbsp;Configuration&lt;/h2&gt;
+&lt;p&gt;Edit the &lt;code&gt;~/.ssh/config&lt;/code&gt; to save information about some of the hosts that you typically connect&amp;nbsp;to.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Host tasker&lt;/span&gt;
+&lt;span class="err"&gt;   HostName someserver.example.com&lt;/span&gt;
+&lt;span class="err"&gt;   Port 7000&lt;/span&gt;
+&lt;span class="err"&gt;   UserName admin&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then you can just ssh into that machine with &lt;code&gt;ssh tasker&lt;/code&gt;, instead of &lt;code&gt;ssh admin@someserver.example.com -p 7000&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;You can repeat with all your hosts that you can connect&amp;nbsp;to.&lt;/p&gt;
+&lt;h2&gt;Creating&amp;nbsp;Files&lt;/h2&gt;
+&lt;p&gt;To create a few files with the same/similar names, you can use the&amp;nbsp;following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;touch output{0,1,2,}.txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will create the following files
+* output0.txt
+* output1.txt
+* output2.txt
+*&amp;nbsp;output.txt&lt;/p&gt;
+&lt;p&gt;The last one is because I left the trailing &lt;code&gt;,&lt;/code&gt; in the curly&amp;nbsp;braces.&lt;/p&gt;
+&lt;h3&gt;Creating a backup&amp;nbsp;file&lt;/h3&gt;
+&lt;p&gt;This one is very similar to above.
+If you have a file that you just want to put a &lt;code&gt;.bak&lt;/code&gt; extention&amp;nbsp;on:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;cp file.txt{,.bak}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will keep the original &lt;code&gt;file.txt&lt;/code&gt; and create a quick backup as &lt;code&gt;file.txt.bak&lt;/code&gt;.&lt;/p&gt;</content><category term="Linux"></category><category term="programming"></category><category term="linux"></category><category term="bash"></category></entry></feed>

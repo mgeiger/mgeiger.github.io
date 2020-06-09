@@ -1,5 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Matthew Geiger's Blog - python</title><link href="https://mgeiger.github.io/" rel="alternate"></link><link href="https://mgeiger.github.io/feeds/python.atom.xml" rel="self"></link><id>https://mgeiger.github.io/</id><updated>2020-06-05T08:20:00-04:00</updated><entry><title>Pytest Exit Usage</title><link href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html" rel="alternate"></link><published>2020-06-05T08:20:00-04:00</published><updated>2020-06-05T00:00:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-06-05:/articles/2020/06/05/pytest-exit-usage.html</id><summary type="html">&lt;p&gt;Using the &lt;code&gt;pytest.exit&lt;/code&gt; method in your code and what to expect for its&amp;nbsp;results.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Most of my information comes from experiences at work. 
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Matthew Geiger's Blog - programming</title><link href="https://mgeiger.github.io/" rel="alternate"></link><link href="https://mgeiger.github.io/feeds/programming.tag.atom.xml" rel="self"></link><id>https://mgeiger.github.io/</id><updated>2020-06-05T14:55:00-04:00</updated><entry><title>Interesting Linux Command Line Tricks</title><link href="https://mgeiger.github.io/articles/2020/06/05/interesting-linux-command-line-tricks.html" rel="alternate"></link><published>2020-06-05T14:55:00-04:00</published><updated>2020-06-05T14:55:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-06-05:/articles/2020/06/05/interesting-linux-command-line-tricks.html</id><summary type="html">&lt;p&gt;A collection of tools, tips, and tricks that I use in my daily live working the command&amp;nbsp;line&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Shortcuts&lt;/h2&gt;
+&lt;p&gt;Go to the beginning of a line:
+&lt;code&gt;ctrl-a&lt;/code&gt;
+Search for your prior commands:
+&lt;code&gt;ctrl-r&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Aliases&lt;/h2&gt;
+&lt;p&gt;Quick &lt;code&gt;history&lt;/code&gt; information:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias h='history'&lt;/code&gt;
+&lt;code&gt;alias hg='history | grep --color=auto'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Keep an eye on your local&amp;nbsp;network:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias LAN='nmap -sn 192.168.1.* | grep report'&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Monitor your system&amp;nbsp;logs:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias LOG='tail -f /var/log/*log /var/log/*/*log'&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;History&lt;/h2&gt;
+&lt;p&gt;Add to your &lt;code&gt;~/.bashrc&lt;/code&gt; &lt;code&gt;HISTFILESIZE=&lt;/code&gt; some number to increase&amp;nbsp;that&lt;/p&gt;
+&lt;h2&gt;Prior&amp;nbsp;Commands&lt;/h2&gt;
+&lt;p&gt;If you forget to run a command with &lt;code&gt;sudo&lt;/code&gt;, just type &lt;code&gt;sudo !!&lt;/code&gt; and you will rerun that prior command with &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can also do this with a quick&amp;nbsp;alias:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;alias please='sudo $(history -p \!\!)'&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;Web&amp;nbsp;Server&lt;/h2&gt;
+&lt;p&gt;If you have python3 installed on your system, you can quickly make a simple webserver that you can access via&amp;nbsp;http.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;python3 -m http.server&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;It gets servered to http://localhost:8000, so keep that in&amp;nbsp;mind.&lt;/p&gt;
+&lt;h2&gt;&lt;span class="caps"&gt;SSH&lt;/span&gt;&amp;nbsp;Configuration&lt;/h2&gt;
+&lt;p&gt;Edit the &lt;code&gt;~/.ssh/config&lt;/code&gt; to save information about some of the hosts that you typically connect&amp;nbsp;to.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Host tasker&lt;/span&gt;
+&lt;span class="err"&gt;   HostName someserver.example.com&lt;/span&gt;
+&lt;span class="err"&gt;   Port 7000&lt;/span&gt;
+&lt;span class="err"&gt;   UserName admin&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then you can just ssh into that machine with &lt;code&gt;ssh tasker&lt;/code&gt;, instead of &lt;code&gt;ssh admin@someserver.example.com -p 7000&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;You can repeat with all your hosts that you can connect&amp;nbsp;to.&lt;/p&gt;
+&lt;h2&gt;Creating&amp;nbsp;Files&lt;/h2&gt;
+&lt;p&gt;To create a few files with the same/similar names, you can use the&amp;nbsp;following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;touch output{0,1,2,}.txt&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will create the following files
+* output0.txt
+* output1.txt
+* output2.txt
+*&amp;nbsp;output.txt&lt;/p&gt;
+&lt;p&gt;The last one is because I left the trailing &lt;code&gt;,&lt;/code&gt; in the curly&amp;nbsp;braces.&lt;/p&gt;
+&lt;h3&gt;Creating a backup&amp;nbsp;file&lt;/h3&gt;
+&lt;p&gt;This one is very similar to above.
+If you have a file that you just want to put a &lt;code&gt;.bak&lt;/code&gt; extention&amp;nbsp;on:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;cp file.txt{,.bak}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will keep the original &lt;code&gt;file.txt&lt;/code&gt; and create a quick backup as &lt;code&gt;file.txt.bak&lt;/code&gt;.&lt;/p&gt;</content><category term="Linux"></category><category term="programming"></category><category term="linux"></category><category term="bash"></category></entry><entry><title>Pytest Exit Usage</title><link href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html" rel="alternate"></link><published>2020-06-05T08:20:00-04:00</published><updated>2020-06-05T00:00:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-06-05:/articles/2020/06/05/pytest-exit-usage.html</id><summary type="html">&lt;p&gt;Using the &lt;code&gt;pytest.exit&lt;/code&gt; method in your code and what to expect for its&amp;nbsp;results.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Most of my information comes from experiences at work. 
 I like to document some little tips and tricks I come across while helping my teammates.
 Usually I have my methods for getting things accomplished, but I always have a team member who wants something a little unusual when they are writing up their automation&amp;nbsp;tests.&lt;/p&gt;
 &lt;p&gt;This request was no&amp;nbsp;different.&lt;/p&gt;
@@ -70,7 +123,8 @@ This sounds like something good to work&amp;nbsp;with.&lt;/p&gt;
 &lt;span class="o"&gt;===================================&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;failed&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;passed&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ow"&gt;in&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mf"&gt;0.12&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;====================================&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="python"></category><category term="python"></category><category term="pytest"></category><category term="programming"></category></entry><entry><title>Using pytest-watch for Continous Testing</title><link href="https://mgeiger.github.io/articles/2020/05/26/using-pytest-watch.html" rel="alternate"></link><published>2020-05-26T21:49:00-04:00</published><updated>2020-05-26T21:49:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-26:/articles/2020/05/26/using-pytest-watch.html</id><summary type="html">&lt;p&gt;Using a continuous monitoring testing tool with your Python Pytest&amp;nbsp;project&lt;/p&gt;</summary><content type="html">&lt;p&gt;I started making an interesting tool called gotime. 
 I&amp;#8217;m a big fan of Test Driven Development and working with&amp;nbsp;pytest.&lt;/p&gt;
-&lt;p&gt;This tool &lt;a href="https://pypi.org/project/pytest-watch/"&gt;pytest-watch&lt;/a&gt; will continuously monitor your project and run any test that has underlying changes to your project&amp;nbsp;code.&lt;/p&gt;</content><category term="Python"></category><category term="programming"></category><category term="python"></category><category term="pytest"></category><category term="pytest-watch"></category></entry><entry><title>Python Method Arguments</title><link href="https://mgeiger.github.io/articles/2020/05/18/python-method-arguments.html" rel="alternate"></link><published>2020-05-18T21:41:00-04:00</published><updated>2020-05-18T00:00:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-18:/articles/2020/05/18/python-method-arguments.html</id><summary type="html">&lt;p&gt;Finding Keyword Arguments in Python Class&amp;nbsp;Methods&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work, we have a library that we are installing using a Git Hash.
+&lt;p&gt;This tool &lt;a href="https://pypi.org/project/pytest-watch/"&gt;pytest-watch&lt;/a&gt; will continuously monitor your project and run any test that has underlying changes to your project&amp;nbsp;code.&lt;/p&gt;</content><category term="Python"></category><category term="programming"></category><category term="python"></category><category term="pytest"></category><category term="pytest-watch"></category></entry><entry><title>Adding Annotations to Chartjs</title><link href="https://mgeiger.github.io/articles/2020/05/26/chartjs-annotations.html" rel="alternate"></link><published>2020-05-26T21:09:00-04:00</published><updated>2020-05-26T21:09:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-26:/articles/2020/05/26/chartjs-annotations.html</id><summary type="html">&lt;p&gt;Adding Line and Box annotations to a Chartjs&amp;nbsp;Display&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was slowly generating some data on site that I wanted to display using &lt;a href="https://www.chartjs.org/"&gt;Chart.js&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;The end goal was to have a quick visualizaiton showing good/mediocre/bad&amp;nbsp;numbers.&lt;/p&gt;</content><category term="Javascript"></category><category term="programming"></category><category term="javascript"></category><category term="chartjs"></category></entry><entry><title>Python Method Arguments</title><link href="https://mgeiger.github.io/articles/2020/05/18/python-method-arguments.html" rel="alternate"></link><published>2020-05-18T21:41:00-04:00</published><updated>2020-05-18T00:00:00-04:00</updated><author><name>Matthew Geiger</name></author><id>tag:mgeiger.github.io,2020-05-18:/articles/2020/05/18/python-method-arguments.html</id><summary type="html">&lt;p&gt;Finding Keyword Arguments in Python Class&amp;nbsp;Methods&lt;/p&gt;</summary><content type="html">&lt;p&gt;At work, we have a library that we are installing using a Git Hash.
 This is an older library that has not been updated to use proper versioning and&amp;nbsp;packaging. &lt;/p&gt;
 &lt;p&gt;The library has a change that needs to get pulled down but not all users are updating this library.
 The Goal of this is to check to see if a keyword argument has been added to a class method. 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
 <head>
-    <title>python - Matthew Geiger's Blog</title>
+    <title>Determine Sun Up or Down using Python - Matthew Geiger's Blog</title>
     <!-- Using the latest rendering mode for IE -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -9,16 +9,22 @@
 
 
 
+<link rel="canonical" href="https://mgeiger.github.io/drafts/determine-sun-up-down.html">
 
-    <meta name="author" content="Matthew Geiger" />
-    <meta name="keywords" content="python" />
+        <meta name="author" content="Matthew Geiger" />
+        <meta name="keywords" content="python,programming" />
+        <meta name="description" content="Based upon a location, we should be able to determine if the sun at that location is up or down" />
 
-    <!-- Open Graph tags -->
         <meta property="og:site_name" content="Matthew Geiger's Blog" />
-        <meta property="og:type" content="website"/>
-        <meta property="og:title" content="Matthew Geiger's Blog"/>
-        <meta property="og:url" content="https://mgeiger.github.io"/>
-        <meta property="og:description" content="Matthew Geiger's Blog"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Determine Sun Up or Down using Python"/>
+        <meta property="og:url" content="https://mgeiger.github.io/drafts/determine-sun-up-down.html"/>
+        <meta property="og:description" content="Based upon a location, we should be able to determine if the sun at that location is up or down"/>
+        <meta property="article:published_time" content="2020-05-30" />
+            <meta property="article:section" content="python" />
+            <meta property="article:tag" content="python" />
+            <meta property="article:tag" content="programming" />
+            <meta property="article:author" content="Matthew Geiger" />
 
 
 
@@ -33,7 +39,7 @@
         <link href="https://mgeiger.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Matthew Geiger's Blog ATOM Feed"/>
 
-        <link href="https://mgeiger.github.io/feeds/python.tag.atom.xml" type="application/atom+xml" rel="alternate"
+        <link href="https://mgeiger.github.io/feeds/python.atom.xml" type="application/atom+xml" rel="alternate"
               title="Matthew Geiger's Blog python ATOM Feed"/>
 </head>
 <body>
@@ -64,7 +70,7 @@ Matthew Geiger's Blog            </a>
                         <li >
                             <a href="https://mgeiger.github.io/category/linux.html">Linux</a>
                         </li>
-                        <li >
+                        <li class="active">
                             <a href="https://mgeiger.github.io/category/python.html">Python</a>
                         </li>
             </ul>
@@ -82,73 +88,24 @@ Matthew Geiger's Blog            </a>
 <div class="container">
     <div class="row">
         <div class="col-sm-9">
-            <article>
-                <h2><a href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html">Pytest Exit&nbsp;Usage</a></h2>
-                    <div class="well well-sm">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://mgeiger.github.io/drafts/determine-sun-up-down.html"
+                       rel="bookmark"
+                       title="Permalink to Determine Sun Up or Down using Python">
+                        Determine Sun Up or Down using&nbsp;Python
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
 <footer class="post-info">
     <span class="label label-default">Date</span>
     <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2020-06-05T08:20:00-04:00"> Fri 05 June 2020</time>
-    </span>
-        <span class="label label-default">Read time</span>
-        <span class="published">
-            <i class="fa fa-hourglass"></i> 3 min</span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="https://mgeiger.github.io/tag/python.html">python</a>
-        /
-	<a href="https://mgeiger.github.io/tag/pytest.html">pytest</a>
-        /
-	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><p>Using the <code>pytest.exit</code> method in your code and what to expect for its&nbsp;results.</p>
-                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/articles/2020/06/05/pytest-exit-usage.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://mgeiger.github.io/articles/2020/05/26/using-pytest-watch.html">Using pytest-watch for Continous&nbsp;Testing</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2020-05-26T21:49:00-04:00"> Tue 26 May 2020</time>
-    </span>
-        <span class="label label-default">Read time</span>
-        <span class="published">
-            <i class="fa fa-hourglass"></i> 1 min</span>
-
-
-
-
-
-<span class="label label-default">Tags</span>
-	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
-        /
-	<a href="https://mgeiger.github.io/tag/python.html">python</a>
-        /
-	<a href="https://mgeiger.github.io/tag/pytest.html">pytest</a>
-        /
-	<a href="https://mgeiger.github.io/tag/pytest-watch.html">pytest-watch</a>
-    
-</footer><!-- /.post-info -->                    </div>
-                <div class="summary"><p>Using a continuous monitoring testing tool with your Python Pytest&nbsp;project</p>
-                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/articles/2020/05/26/using-pytest-watch.html">more ...</a>
-                </div>
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="https://mgeiger.github.io/articles/2020/05/18/python-method-arguments.html">Python Method&nbsp;Arguments</a></h2>
-                    <div class="well well-sm">
-<footer class="post-info">
-    <span class="label label-default">Date</span>
-    <span class="published">
-        <i class="fa fa-calendar"></i><time datetime="2020-05-18T21:41:00-04:00"> Mon 18 May 2020</time>
+        <i class="fa fa-calendar"></i><time datetime="2020-05-30T15:47:00-04:00"> Sat 30 May 2020</time>
     </span>
         <span class="label label-default">Read time</span>
         <span class="published">
@@ -164,11 +121,13 @@ Matthew Geiger's Blog            </a>
 	<a href="https://mgeiger.github.io/tag/programming.html">programming</a>
     
 </footer><!-- /.post-info -->                    </div>
-                <div class="summary"><p>Finding Keyword Arguments in Python Class&nbsp;Methods</p>
-                    <a class="btn btn-default btn-xs" href="https://mgeiger.github.io/articles/2020/05/18/python-method-arguments.html">more ...</a>
                 </div>
-            </article>
-            <hr/>
+                <p>I have a neat little timelapse on a Raspberry Pi that records my backyard.
+I&#8217;ll be&nbsp;linking </p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
 
         </div>
         <div class="col-sm-3" id="sidebar">
